@@ -1,2 +1,5 @@
 /build
 /node_modules
+/coverage
+/storybook-static
+__snapshots__/

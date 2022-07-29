@@ -1,20 +1,30 @@
 import React, { useState, useEffect } from 'react';
+import { Steps } from 'shared/ui/steps';
 
 const Home = () => {
-  const [count, setCount] = useState<number>(0);
-  const [doubleCount, setDoubleCount] = useState<number>(1);
+  const [activeStep, setActiveStep] = useState<number>(0);
 
-  useEffect(() => {
-    setDoubleCount((prev) => prev + 2);
-  }, [count]);
+  const handleSelect = (step: number) => {
+    setActiveStep(step);
+  };
+
+  const checkValid = (step: number, index: number) => {
+    console.log('==========>step', step);
+    console.log('==========>index', index);
+
+    return true;
+  };
 
   return (
     <div>
-      Home
-      {process.env.name}
-      {count}
-      {doubleCount}
-      <button onClick={() => setCount((prev) => prev + 1)}>обновить</button>
+      <Steps isValid={checkValid} color="blue" onSelect={handleSelect} isColumn activeStep={activeStep}>
+        <Steps.Step>1 шаг</Steps.Step>
+        <Steps.Step>2 шаг</Steps.Step>
+        <Steps.Step>3 шаг</Steps.Step>
+        <Steps.Step>4 шаг</Steps.Step>
+        <Steps.Step>5 шаг</Steps.Step>
+      </Steps>
+
     </div>
   );
 };
