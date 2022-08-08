@@ -83,7 +83,7 @@
 			}
 		}
 
-		@include backgroundColor("button", $colors);
+		@include backgroundColor("step", $colors);
 
 		span {
 			display: block;

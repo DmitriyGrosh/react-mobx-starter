@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Steps } from 'shared/ui/steps';
+import { Button } from 'shared/ui/button';
 
 const Home = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
@@ -24,7 +25,7 @@ const Home = () => {
         <Steps.Step>4 шаг</Steps.Step>
         <Steps.Step>5 шаг</Steps.Step>
       </Steps>
-
+      <Button>отправить</Button>
     </div>
   );
 };

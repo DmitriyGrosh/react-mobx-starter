@@ -90,6 +90,6 @@ const Template: ComponentStory<typeof Steps> = ({ nonLinear, ...args }) => {
 export const Default = Template.bind({});
 Default.args = {
 	nonLinear: false,
-	column: false,
+	isColumn: false,
 	isValid,
 };

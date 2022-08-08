@@ -1,0 +1,51 @@
+@mixin button($component, $colors) {
+	@each $color in $colors {
+		.#{$component}-color-#{"" + $color} {
+
+			&__text {
+				background: none;
+				color: toRgba($color, 0.7);
+				border: none;
+
+				&:hover {
+					background-color: toRgba($color, 0.1);
+				}
+			}
+
+			&__contained {
+				border: none;
+
+				&:hover {
+					background-color: toRgba($color, 0.8);
+				}
+			}
+
+			&__outlined {
+				border: 2px solid toRgba($color, 0.7);
+				background: none;
+				color: toRgba($color, 0.7);
+
+				&:hover {
+					background-color: toRgba($color, 0.1);
+					border-color: toRgba($color, 0.9);
+					color: toRgba($color, 0.9);
+				}
+			}
+
+			&__small {
+				padding: 5px;
+				font-size: 14px;
+			}
+
+			&__medium {
+				padding: 8px;
+				font-size: 16px;
+			}
+
+			&__large {
+				padding: 12px;
+				font-size: 18px;
+			}
+		}
+	}
+}

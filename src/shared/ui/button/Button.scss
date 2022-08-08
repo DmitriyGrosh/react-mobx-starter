@@ -1,0 +1,11 @@
+@import "src/app/styles/mixins";
+@import "src/app/styles/vars";
+@import "Button.mixin";
+
+.button {
+	border-radius: 5px;
+	padding: 10px;
+}
+
+@include backgroundColor("button", $colors);
+@include button("button", $colors);

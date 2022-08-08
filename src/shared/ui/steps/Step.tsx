@@ -18,7 +18,7 @@ const Step: FC<PropsWithChildren> = ({ children }) => {
 		isColumn,
 		color,
 	} =	useContext<IStepsContextProps>(StepsContext);
-	const classNameColor = `button-color-${color}`;
+	const classNameColor = `step-color-${color}`;
 	const isDefaultBgColor = isActive || isCompleted ? classNameColor : '';
 
 	const handleChange = () => {
