@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+
 import { Steps } from 'shared/ui/steps';
 import { Button } from 'shared/ui/button';
+import { Input } from 'shared/ui/input';
 
 const Home = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
@@ -10,10 +13,15 @@ const Home = () => {
   };
 
   const checkValid = (step: number, index: number) => {
-    console.log('==========>step', step);
-    console.log('==========>index', index);
-
     return true;
+  };
+
+  const { register, getValues } = useForm();
+
+  const getData = () => {
+    const data = getValues();
+
+    console.log('==========>data', data);
   };
 
   return (
@@ -25,7 +33,9 @@ const Home = () => {
         <Steps.Step>4 шаг</Steps.Step>
         <Steps.Step>5 шаг</Steps.Step>
       </Steps>
-      <Button>отправить</Button>
+      <Button onClick={getData}>отправить</Button>
+      <Input placeholder="Second Name" label="Second Name" {...register('secondName')} />
+      <Input placeholder="First Name" label="First Name" {...register('firstName')} />
     </div>
   );
 };
