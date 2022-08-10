@@ -43,3 +43,56 @@ white;
 		}
 	}
 }
+
+@mixin columnFlexCenter {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin columnFlexBetween {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+@mixin columnFlexStart {
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
+}
+
+@mixin columnFlexEnd {
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	align-items: center;
+}
+
+@mixin inlineFlexCenter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin inlineFlexBetween {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+@mixin inlineFlexStart {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+}
+
+@mixin inlineFlexEnd {
+	display: flex;
+	justify-content: end;
+	align-items: center;
+}
+
