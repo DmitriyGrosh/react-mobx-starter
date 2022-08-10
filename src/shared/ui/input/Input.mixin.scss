@@ -4,13 +4,9 @@
 			display: inline-flex;
 
 			.field {
-				--uiFieldBorderWidth: var(--fieldBorderWidth, 2px);
-				--uiFieldPaddingRight: var(--fieldPaddingRight, 1rem);
-				--uiFieldPaddingLeft: var(--fieldPaddingLeft, 1rem);
-
-				display: var(--fieldDisplay, inline-flex);
+				display: inline-flex;
 				position: relative;
-				font-size: var(--fieldFontSize, 1rem);
+				font-size: 1rem;
 
 				.ha-screen-reader{
 					width: var(--ha-screen-reader-width, 1px);
@@ -35,9 +31,9 @@
 					box-sizing: border-box;
 					width: var(--fieldWidth, 100%);
 					height: var(--fieldHeight, 3rem);
-					padding: var(--fieldPaddingTop, 1.25rem) var(--uiFieldPaddingRight) var(--fieldPaddingBottom, .5rem) var(--uiFieldPaddingLeft);
+					padding: var(--fieldPaddingTop, 1.25rem) 1rem var(--fieldPaddingBottom, .5rem) 1rem;
 					// статический цвет
-					border-bottom: var(--uiFieldBorderWidth) solid var(--fieldBorderColor, rgba(0, 0, 0, .25));
+					border-bottom: 2px solid var(--fieldBorderColor, rgba(0, 0, 0, .25));
 
 					&::-webkit-input-placeholder {
 						opacity: 0;
@@ -70,7 +66,6 @@
 					box-sizing: border-box;
 					pointer-events: none;
 					cursor: text;
-					overflow: hidden;
 
 					position: absolute;
 					top: 0;
@@ -78,7 +73,7 @@
 					bottom: 0;
 					left: 0;
 
-					&::after{
+					&::after {
 						content: "";
 						box-sizing: border-box;
 						width: 100%;
@@ -93,7 +88,7 @@
 
 				&__label {
 					position: absolute;
-					left: var(--uiFieldPaddingLeft);
+					left: 1rem;
 					top: calc(50% - .5em);
 
 					line-height: 1;
@@ -122,7 +117,7 @@
 
 			.field__standard .field__label-wrap::after{
 				// движжение цвета
-				border-bottom: var(--uiFieldBorderWidth) solid toRgba($color, 0.7);
+				border-bottom: 2px solid toRgba($color, 0.7);
 				transform: translate3d(-105%, 0, 0);
 				will-change: transform, opacity;
 				transition: transform .285s ease-out .2s, opacity .2s ease-out .2s;
@@ -131,6 +126,16 @@
 			.field__standard .field__input:focus ~ .field__label-wrap::after{
 				transform: translate3d(0, 0, 0);
 				transition-delay: 0;
+			}
+
+			.field__outlined .field__label-wrap::after{
+				border: 2px solid $color;
+				will-change: opacity, height;
+				transition: height .2s ease-out, opacity .2s ease-out;
+			}
+
+			.field__outlined .field__input:focus ~ .field__label-wrap::after{
+				height: 100%;
 			}
 		}
 	}
