@@ -27,7 +27,7 @@ const Input = forwardRef<HTMLInputElement, PropsWithChildren<IInput>>((props, re
 		<div className={classNamesColor}>
 			<div className={`field ${cx}`}>
 				<label htmlFor={inputId} className="ha-screen-reader">{label}</label>
-				<input id={inputId} className="field__input" {...rest} />
+				<input id={inputId} className="field__input" {...rest} ref={ref} />
 				<span className="field__label-wrap" aria-hidden="true">
           <span className="field__label">{label}</span>
     </span>
