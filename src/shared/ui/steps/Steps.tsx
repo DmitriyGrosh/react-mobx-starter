@@ -44,7 +44,9 @@ const Steps: FC<PropsWithChildren<IStepsProps>> = ({
 			const isValidStep = isFunction(isValid) ? isValid(activeStep, index) : true;
 
 			const StepContext = (
-				<StepsContext.Provider value={{
+				<StepsContext.Provider
+					key={index}
+					value={{
 						isFirst,
 						isLast,
 						isActive,

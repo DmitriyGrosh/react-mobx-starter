@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Steps } from 'shared/ui/steps';
 import { Button } from 'shared/ui/button';
 import { Input } from 'shared/ui/input';
+import { Select } from 'shared/ui/select';
 
 const Home = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
@@ -36,6 +37,12 @@ const Home = () => {
       <Button onClick={getData}>отправить</Button>
       <Input placeholder="Second Name" label="Second Name" {...register('secondName')} />
       <Input placeholder="First Name" label="First Name" {...register('firstName')} />
+      <Select {...register('select')} value={1}>
+        <Select.Option value={1}>label</Select.Option>
+        <Select.Option value="2">label 1</Select.Option>
+        <Select.Option value="3">label 2</Select.Option>
+        <Select.Option value="4">label 3</Select.Option>
+      </Select>
     </div>
   );
 };
