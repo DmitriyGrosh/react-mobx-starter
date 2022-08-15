@@ -8,10 +8,15 @@ import {
 	Context,
 } from 'react';
 
+export interface IActiveElement {
+	value?: string | number;
+	label?: string;
+}
+
 export interface ISelectContext extends InputHTMLAttributes<HTMLInputElement> {
 	ref: ForwardedRef<HTMLInputElement>;
-	activeElement?: string | number;
-	setActiveElement: Dispatch<SetStateAction<string | number | undefined>>;
+	activeElement?: IActiveElement;
+	setActiveElement: Dispatch<SetStateAction<IActiveElement>>;
 }
 
 export const SelectContext = createContext({} as ISelectContext);

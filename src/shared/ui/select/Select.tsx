@@ -11,7 +11,7 @@ import React, {
 } from 'react';
 import { assign, map } from 'lodash';
 
-import { SelectContext } from './Select.context';
+import { IActiveElement, SelectContext } from './Select.context';
 
 import Option from './Option';
 
@@ -22,7 +22,10 @@ interface ISelect extends InputHTMLAttributes<HTMLInputElement> {
 
 const Select = forwardRef<HTMLInputElement, PropsWithChildren<ISelect>>((props, ref) => {
 	const { children, value, ...rest } = props;
-	const [activeElement, setActiveElement] = useState<string | number | undefined>(value);
+	const [activeElement, setActiveElement] = useState<IActiveElement>({
+		label: '',
+		value: value?.toString(),
+	});
 
 	const options = Children.toArray(children);
 
@@ -54,11 +57,11 @@ const Select = forwardRef<HTMLInputElement, PropsWithChildren<ISelect>>((props, 
 				},
 			};
 
-			setActiveElement(value.toString());
 			rest.onChange(defaultValue as ChangeEvent<HTMLInputElement>);
 		}
 	}, []);
 
+	console.log('==========>activeElement.label', activeElement.label);
 	return (
 		<div className="select">
 			{render()}
