@@ -1,0 +1,80 @@
+@import "src/app/styles/mixins";
+@import "src/app/styles/vars";
+
+@mixin selectColor($component, $colors) {
+	@each $color in $colors {
+		.#{$component}-color-#{"" + $color} {
+			position: relative;
+			width: 300px;
+			height: 42px;
+			z-index: 1;
+			display: inline-flex;
+			border: 1px solid $color;
+			padding-left: 10px;
+			border-radius: 5px;
+
+			.selected {
+				@include inlineFlexCenter;
+			}
+
+			.options {
+				position: absolute;
+				top: 50px;
+				right: 0;
+				left: 0;
+				width: 100%;
+				margin: 0 auto;
+				background-color: #fff;
+				border-radius: 4px;
+				max-height: 0;
+				overflow: scroll;
+				transition: max-height 200ms ease;
+
+				&__active {
+					max-height: 500px;
+					opacity: 1;
+					transition: max-height 400ms ease;
+					border: 1px solid lightgray;
+				}
+
+				.option {
+					padding: 10px;
+					position: relative;
+					border-top: 1px solid toRgba($color, 0.5);
+
+					&:first-child {
+						border-top: none;
+					}
+
+					&:hover {
+						background: toRgba($color, 0.1);
+					}
+
+					&__text {
+
+					}
+
+					&__radio {
+						top: 0;
+						left: 0;
+						position: absolute;
+						opacity: 0;
+						width: 100%;
+						height: 100%;
+					}
+
+					&__active {
+						background: $color;
+						color: white;
+
+						&:hover {
+							background: toRgba($color, 0.6);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@include selectColor('select', $colors);

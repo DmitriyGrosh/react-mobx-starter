@@ -37,11 +37,23 @@ const Home = () => {
       <Button onClick={getData}>отправить</Button>
       <Input placeholder="Second Name" label="Second Name" {...register('secondName')} />
       <Input placeholder="First Name" label="First Name" {...register('firstName')} />
-      <Select {...register('select')} value={1}>
-        <Select.Option value={1}>label</Select.Option>
+      <Select {...register('select')} value="1" color="indigo">
+        <Select.Option value="1">label</Select.Option>
         <Select.Option value="2">label 1</Select.Option>
         <Select.Option value="3">label 2</Select.Option>
         <Select.Option value="4">label 3</Select.Option>
+        <Select.Option value="5">label 3</Select.Option>
+        <Select.Option value="6">label 3</Select.Option>
+        <Select.Option value="7">label 3</Select.Option>
+        <Select.Option value="8">label 3</Select.Option>
+        <Select.Option value="9">label 3</Select.Option>
+        <Select.Option value="10">label 3</Select.Option>
+        <Select.Option value="11">label 3</Select.Option>
+        <Select.Option value="12">label 3</Select.Option>
+        <Select.Option value="13">label 3</Select.Option>
+        <Select.Option value="14">label 3</Select.Option>
+        <Select.Option value="15">label 3</Select.Option>
+        <Select.Option value="16">label 4</Select.Option>
       </Select>
     </div>
   );

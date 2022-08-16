@@ -1,5 +1,12 @@
-import React, { FC, useContext, PropsWithChildren, Children, useEffect } from 'react';
+import React, {
+	FC,
+	useContext,
+	PropsWithChildren,
+	Children,
+	useEffect,
+} from 'react';
 import { ISelectContext, SelectContext } from './Select.context';
+import { joinClassNames } from '../../lib/cx';
 
 interface IOption {
 	value: string | number;
@@ -9,6 +16,7 @@ const Option: FC<PropsWithChildren<IOption>> = ({ children, value }) => {
 	const { ref, activeElement, setActiveElement, ...rest } = useContext<ISelectContext>(SelectContext);
 	const isActive = activeElement?.value === value.toString();
 	const label = Children.toArray(children)[0];
+	const cx = joinClassNames(`option ${isActive && 'option__active'}`);
 
 	const handleChangeActiveElement = () => {
 		setActiveElement({
@@ -28,9 +36,9 @@ const Option: FC<PropsWithChildren<IOption>> = ({ children, value }) => {
 
 	return (
 		// eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus
-		<div role="button" onClick={handleChangeActiveElement}>
-			<label>{children}</label>
-			<input {...rest} ref={ref} type="radio" value={value} checked={isActive} />
+		<div className={cx} role="button" onClick={handleChangeActiveElement}>
+			<input className="option__radio" {...rest} ref={ref} type="radio" value={value} checked={isActive} />
+			<span className="option__text">{children}</span>
 		</div>
 	);
 };

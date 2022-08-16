@@ -7,13 +7,17 @@ import React, {
 	cloneElement,
 	forwardRef,
 	useState,
-	useEffect,
+	useEffect, useRef,
 } from 'react';
 import { assign, map } from 'lodash';
 
-import { IActiveElement, SelectContext } from './Select.context';
+import { joinClassNames } from '../../lib/cx';
+import { useHandleOutside } from '../../lib/hooks';
 
+import { IActiveElement, SelectContext } from './Select.context';
 import Option from './Option';
+
+import './Select.scss';
 
 interface ISelect extends InputHTMLAttributes<HTMLInputElement> {
 	value?: string | number;
@@ -21,13 +25,23 @@ interface ISelect extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Select = forwardRef<HTMLInputElement, PropsWithChildren<ISelect>>((props, ref) => {
-	const { children, value, ...rest } = props;
+	const { children, value, color, ...rest } = props;
 	const [activeElement, setActiveElement] = useState<IActiveElement>({
 		label: '',
 		value: value?.toString(),
 	});
+	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const selectRef = useRef<HTMLDivElement>(null);
 
 	const options = Children.toArray(children);
+
+	const toggleOpen = () => {
+		setIsOpen((prev) => !prev);
+	};
+
+	const handleClose = () => {
+		setIsOpen(false);
+	};
 
 	const render = (): JSX.Element[] => {
 		return map(options, (option, index) => {
@@ -61,14 +75,24 @@ const Select = forwardRef<HTMLInputElement, PropsWithChildren<ISelect>>((props, 
 		}
 	}, []);
 
-	console.log('==========>activeElement.label', activeElement.label);
+	const optionsClassName = joinClassNames(`options ${isOpen && 'options__active'}`);
+
+	useHandleOutside<HTMLDivElement>(selectRef, handleClose, 'mousedown');
+
 	return (
-		<div className="select">
-			{render()}
+		// eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
+		<div ref={selectRef} onClick={toggleOpen} className={`select-color-${color}`}>
+			<span className="selected">{activeElement.label ?? 'Select your variant'}</span>
+			<div className={optionsClassName}>
+				{render()}
+			</div>
 		</div>
 	);
 });
 
 Select.displayName = 'Select';
+Select.defaultProps = {
+	color: 'blue',
+};
 
 export default assign(Select, { Option });
