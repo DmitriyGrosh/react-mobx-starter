@@ -1,6 +1,13 @@
-import React, { ChangeEvent, Children, FC, PropsWithChildren, useContext, useEffect } from 'react';
+import React, {
+	Children,
+	FC,
+	PropsWithChildren,
+	useContext,
+} from 'react';
+import { isEqual } from 'lodash';
+
 import { MultiSelectContext } from './MultiSelect.context';
-import { includes, isEqual } from 'lodash';
+
 import { joinClassNames } from '../../lib/cx';
 
 interface IOption {
@@ -67,5 +74,7 @@ const Option: FC<PropsWithChildren<IOption>> = ({ children, data }) => {
 		</div>
 	);
 };
+
+Option.displayName = 'Multi Select Option';
 
 export default Option;

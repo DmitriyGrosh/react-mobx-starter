@@ -26,6 +26,13 @@ const Home = () => {
     console.log('==========>data', data);
   };
 
+  const defaultValueMultiSelect = {
+    label: 'Multi 1',
+    data: {
+      id: 1,
+    },
+  };
+
   return (
     <div>
       <Steps isValid={checkValid} color="blue" onSelect={handleSelect} isColumn activeStep={activeStep}>
@@ -56,7 +63,12 @@ const Home = () => {
         <Select.Option value="15">label 3</Select.Option>
         <Select.Option value="16">label 4</Select.Option>
       </Select>
-      <MultiSelect label="Select multi select" control={control} controlName="multiSelect">
+      <MultiSelect
+        defaultValue={defaultValueMultiSelect}
+        label="Select multi select"
+        control={control}
+        controlName="multiSelect"
+      >
         <MultiSelect.Option data={{ id: 1 }}>Multi 1</MultiSelect.Option>
         <MultiSelect.Option data={{ id: 2 }}>Multi 2</MultiSelect.Option>
         <MultiSelect.Option data={{ id: 3 }}>Multi 3</MultiSelect.Option>

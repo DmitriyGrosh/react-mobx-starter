@@ -1,10 +1,10 @@
 import React, {
 	Children,
 	cloneElement, FC,
-	forwardRef,
-	InputHTMLAttributes,
 	PropsWithChildren,
-	ReactElement, useEffect, useRef,
+	ReactElement,
+	useEffect,
+	useRef,
 	useState,
 } from 'react';
 import { assign, map, isEqual } from 'lodash';
@@ -17,15 +17,14 @@ import Cross from 'assets/svg/Cross';
 import { joinClassNames } from '../../lib/cx';
 import { useHandleOutside, useHandleInside } from '../../lib/hooks';
 
-import { IActiveElement, MultiSelectContext, SelectAction } from './MultiSelect.context';
+import { IActiveElement, MultiSelectContext } from './MultiSelect.context';
 import Option from './Option';
-
 
 import './MultiSelect.scss';
 
 interface IMultiSelect {
 	color?: BaseColors;
-	defaultValue?: string | number;
+	defaultValue?: IActiveElement | IActiveElement[];
 	control: Control;
 	controlName: string;
 	label: string;
@@ -53,7 +52,8 @@ const MultiSelect: FC<PropsWithChildren<IMultiSelect>> = ({
 	});
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const multiSelectRef = useRef<HTMLDivElement>(null);
-	const selectedContainertRef = useRef<HTMLDivElement>(null);
+	const selectedContainerRef = useRef<HTMLDivElement>(null);
+	const optionsClassName = joinClassNames(`options ${isOpen && 'options__active'}`);
 
 	const toggleOpen = () => {
 		setIsOpen((prev) => !prev);
@@ -98,6 +98,9 @@ const MultiSelect: FC<PropsWithChildren<IMultiSelect>> = ({
 		return <>{elements}</>;
 	};
 
+	useHandleOutside<HTMLDivElement>(multiSelectRef, handleClose, 'mousedown');
+	useHandleInside<HTMLDivElement>(selectedContainerRef, toggleOpen, 'mousedown');
+
 	useEffect(() => {
 		const updateElements = onChangeRef.current;
 
@@ -115,21 +118,32 @@ const MultiSelect: FC<PropsWithChildren<IMultiSelect>> = ({
 		}
 	}, [deletedElement]);
 
-	const optionsClassName = joinClassNames(`options ${isOpen && 'options__active'}`);
+	useEffect(() => {
+		const updateElements = onChangeRef.current;
+		if (defaultValue && updateElements) {
+			if (Array.isArray(defaultValue)) {
+				updateElements([...defaultValue]);
+				setActiveElements([...defaultValue]);
+			} else {
+				updateElements([defaultValue]);
+				setActiveElements([defaultValue]);
+			}
+		}
+	}, []);
 
-	useHandleOutside<HTMLDivElement>(multiSelectRef, handleClose, 'mousedown');
-	useHandleInside<HTMLDivElement>(selectedContainertRef, toggleOpen, 'mousedown');
-
+	console.log('==========>defaultValue', defaultValue);
 	return (
 		<div ref={multiSelectRef} className={`multi-select-color-${color}`}>
 			{/* eslint-disable-next-line max-len */}
 			{/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-			<div ref={selectedContainertRef} className="selected-container">
+			<div ref={selectedContainerRef} className="selected-container">
 				{activeElements.length ? (
 					<>
 						{map(activeElements, (el, index) => (
 							<div key={index} className="selected-container__selected">
 								<span className="text">{el.label}</span>
+								{/* eslint-disable-next-line max-len */}
+								{/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
 								<div className="delete" onClick={() => handleDeleteElement(el)}>
 									<Cross />
 								</div>
