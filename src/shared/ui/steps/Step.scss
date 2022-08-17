@@ -1,0 +1,105 @@
+@import "src/app/styles/mixins";
+@import "src/app/styles/vars";
+
+.step {
+	margin: 1rem 0;
+	display: flex;
+	flex: 1 1 0;
+	align-items: center;
+
+	&::after {
+		content: "";
+		position: relative;
+		display: block;
+		height: 0.125rem;
+		background-color: rgba(55,65,81, 1);
+		width: 100%;
+
+		@media (min-width: 640px) {
+			max-width: 640px;
+		}
+
+		@media (min-width: 425px) {
+			max-width: 425px;
+		}
+	}
+
+	&::before {
+		content: "";
+		position: relative;
+		display: block;
+		height: 0.125rem;
+		background-color: rgba(55,65,81, 1);
+		width: 100%;
+
+		@media (min-width: 640px) {
+			max-width: 640px;
+		}
+
+		@media (min-width: 425px) {
+			max-width: 425px;
+		}
+	}
+
+	&:first-child {
+		justify-content: flex-start;
+
+		&::before {
+			display: none;
+		}
+	}
+
+	&:last-child {
+		justify-content: flex-end;
+
+		&::after {
+			display: none;
+		}
+	}
+
+	&__valid {
+		margin: 0 1rem;
+		display: flex;
+		cursor: pointer;
+		flex-direction: row;
+		align-items: center;
+
+		.round {
+			display: flex;
+			cursor: pointer;
+			align-items: center;
+			justify-content: center;
+			background-color: rgba(209, 213, 219, 1);
+			margin-right: 0.125rem;
+			height: 0.5rem;
+			width: 0.5rem;
+			border-radius: 9999px;
+			padding: 1rem;
+			border: 2px solid rgba(55,65,81, 1);
+
+			img {
+				width: 25px;
+				height: 25px;
+			}
+		}
+
+		@include backgroundColor("step", $colors);
+
+		span {
+			display: block;
+			width: max-content;
+		}
+	}
+
+	.column {
+		flex-direction: column;
+	}
+
+	.row {
+		flex-direction: row;
+	}
+
+	&__invalid {
+
+	}
+}

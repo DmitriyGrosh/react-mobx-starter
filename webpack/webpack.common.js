@@ -4,6 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: path.resolve(__dirname, '..', './src/index.tsx'),
   target: 'web',
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, '..', './build'),
+  },
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     alias: {
@@ -45,10 +49,6 @@ module.exports = {
     ],
   },
   mode: 'development',
-  output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, '..', './build'),
-  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '..', './public/index.html'),

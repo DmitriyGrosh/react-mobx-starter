@@ -1,0 +1,98 @@
+$colors: gray,
+red,
+yellow,
+green,
+blue,
+indigo,
+purple,
+pink,
+black,
+white;
+
+@function toRgba($color, $opacity) {
+	@if ($color == gray) {
+		@return rgba(108, 122, 137, $opacity)
+	} @else if ($color == red) {
+		@return rgba(255, 0, 0, $opacity)
+	} @else if ($color == yellow) {
+		@return rgba(255, 255, 0, $opacity)
+	} @else if ($color == green) {
+		@return rgba(0, 255, 0, $opacity)
+	} @else if ($color == blue) {
+		@return rgba(0, 0, 255, $opacity)
+	} @else if ($color == indigo) {
+		@return rgba(75, 0, 130, $opacity)
+	} @else if ($color == purple) {
+		@return rgba(159, 90, 253, $opacity)
+	} @else if ($color == pink) {
+		@return rgba(255, 192, 203, $opacity)
+	} @else {
+		@return $color
+	}
+}
+
+@mixin backgroundColor($component, $colors) {
+	@each $color in $colors {
+		.#{$component}-color-#{"" + $color} {
+			@if ($color == white) {
+				color: black;
+			} @else {
+				color: white;
+			}
+			background-color: toRgba($color, 0.7);
+		}
+	}
+}
+
+@mixin columnFlexCenter {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin columnFlexBetween {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+@mixin columnFlexStart {
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
+}
+
+@mixin columnFlexEnd {
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	align-items: center;
+}
+
+@mixin inlineFlexCenter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin inlineFlexBetween {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+@mixin inlineFlexStart {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+}
+
+@mixin inlineFlexEnd {
+	display: flex;
+	justify-content: end;
+	align-items: center;
+}
+

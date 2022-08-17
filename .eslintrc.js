@@ -8,6 +8,7 @@ module.exports = {
     'airbnb',
     'airbnb/hooks',
     'eslint:recommended',
+    'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:jsx-a11y/strict',
   ],
@@ -87,6 +88,10 @@ module.exports = {
     eqeqeq: ['error', 'always'],
     'no-restricted-exports': ['warn', { restrictedNamedExports: ['default'] }],
     'no-param-reassign': 'warn',
+    'no-tabs': 'off',
+    'react/jsx-no-constructed-context-values': 'off',
+    'react/jsx-indent-props': 'off',
+    'no-nested-ternary': 'off',
   },
   overrides: [
     {
