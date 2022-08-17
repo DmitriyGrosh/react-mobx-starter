@@ -10,13 +10,16 @@ import React, {
 import { assign, map, isEqual } from 'lodash';
 import { Control, Controller } from 'react-hook-form';
 
-import { IActiveElement, MultiSelectContext, SelectAction } from './MultiSelect.context';
-import Option from './Option';
 import { UseFormStateReturn } from 'react-hook-form/dist/types';
 import { ControllerFieldState, ControllerRenderProps } from 'react-hook-form/dist/types/controller';
+
+import Cross from 'assets/svg/Cross';
 import { joinClassNames } from '../../lib/cx';
-import { useHandleOutside } from '../../lib/hooks';
-import { useHandleInside } from '../../lib/hooks/useHandleInside';
+import { useHandleOutside, useHandleInside } from '../../lib/hooks';
+
+import { IActiveElement, MultiSelectContext, SelectAction } from './MultiSelect.context';
+import Option from './Option';
+
 
 import './MultiSelect.scss';
 
@@ -63,7 +66,6 @@ const MultiSelect: FC<PropsWithChildren<IMultiSelect>> = ({
 	const onChangeRef = useRef<any>(null);
 
 	const handleDeleteElement = (current: IActiveElement) => {
-		console.log('==========>1', 1);
 		setDeletedElement(current);
 	};
 
@@ -97,7 +99,6 @@ const MultiSelect: FC<PropsWithChildren<IMultiSelect>> = ({
 	};
 
 	useEffect(() => {
-		console.log('==========>2', 2);
 		const updateElements = onChangeRef.current;
 
 		if (updateElements && deletedElement.label) {
@@ -112,27 +113,12 @@ const MultiSelect: FC<PropsWithChildren<IMultiSelect>> = ({
 			setActiveElements(currentValues);
 			updateElements(currentValues);
 		}
-	}, [deletedElement.value || deletedElement.label]);
+	}, [deletedElement]);
 
 	const optionsClassName = joinClassNames(`options ${isOpen && 'options__active'}`);
 
-	// useHandleOutside<HTMLDivElement>(multiSelectRef, handleClose, 'mousedown');
+	useHandleOutside<HTMLDivElement>(multiSelectRef, handleClose, 'mousedown');
 	useHandleInside<HTMLDivElement>(selectedContainertRef, toggleOpen, 'mousedown');
-
-	// useEffect(() => {
-	// 	const callback = (event: MouseEvent) => {
-	// 		const el = multiSelectRef?.current;
-	//
-	// 		if (!el || el.contains(event.target as Node)) {
-	// 			console.log('==========>1', 1);
-	// 			console.log('==========>el', el);
-	// 			console.log('==========>event.target', event.target);
-	// 			console.log('==========>event.target', (event.target as Node).contains(el));
-	// 			// return;
-	// 		}
-	// 	};
-	// 	document.addEventListener('click', callback);
-	// }, []);
 
 	return (
 		<div ref={multiSelectRef} className={`multi-select-color-${color}`}>
@@ -144,9 +130,9 @@ const MultiSelect: FC<PropsWithChildren<IMultiSelect>> = ({
 						{map(activeElements, (el, index) => (
 							<div key={index} className="selected-container__selected">
 								<span className="text">{el.label}</span>
-								<button className="delete" onClick={() => handleDeleteElement(el)}>
-									delete
-								</button>
+								<div className="delete" onClick={() => handleDeleteElement(el)}>
+									<Cross />
+								</div>
 							</div>
 						))}
 					</>

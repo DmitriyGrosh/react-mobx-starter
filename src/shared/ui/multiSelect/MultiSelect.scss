@@ -5,7 +5,7 @@
 	@each $color in $colors {
 		.#{$component}-color-#{"" + $color} {
 			position: relative;
-			width: 300px;
+			width: 350px;
 			height: 42px;
 			z-index: 1;
 			display: inline-flex;
@@ -15,11 +15,34 @@
 
 			.selected-container {
 				width: 100%;
-				@include inlineFlexCenter;
+				@include inlineFlexStart;
+				gap: 5px;
 
 				&__selected {
 					position: relative;
 					z-index: 100;
+					border: 1px;
+					box-sizing: border-box;
+					padding: 3px;
+					background: toRgba($color, 0.1);
+					border-radius: 5px;
+					@include inlineFlexCenter;
+					gap: 3px;
+
+					.text {
+						font-size: 14px;
+					}
+
+					.delete {
+						width: 18px;
+						height: 100%;
+						@include inlineFlexCenter;
+
+						&:hover {
+							background: toRgba(red, 0.7);
+							border-radius: 5px;
+						}
+					}
 				}
 			}
 
@@ -43,7 +66,7 @@
 					border: 1px solid lightgray;
 				}
 
-				.option {
+				.multi-select-option {
 					padding: 10px;
 					position: relative;
 					border-top: 1px solid toRgba($color, 0.5);
@@ -56,11 +79,7 @@
 						background: toRgba($color, 0.1);
 					}
 
-					&__text {
-
-					}
-
-					&__radio {
+					&__input {
 						top: 0;
 						left: 0;
 						position: absolute;
@@ -70,7 +89,7 @@
 					}
 
 					&__active {
-						background: $color;
+						background: toRgba($color, 0.5);
 						color: white;
 
 						&:hover {
