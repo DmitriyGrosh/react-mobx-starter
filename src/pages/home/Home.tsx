@@ -5,6 +5,7 @@ import { Steps } from 'shared/ui/steps';
 import { Button } from 'shared/ui/button';
 import { Input } from 'shared/ui/input';
 import { Select } from 'shared/ui/select';
+import { MultiSelect } from 'shared/ui/multiSelect';
 
 const Home = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
@@ -17,7 +18,7 @@ const Home = () => {
     return true;
   };
 
-  const { register, getValues } = useForm();
+  const { register, getValues, control } = useForm();
 
   const getData = () => {
     const data = getValues();
@@ -55,6 +56,12 @@ const Home = () => {
         <Select.Option value="15">label 3</Select.Option>
         <Select.Option value="16">label 4</Select.Option>
       </Select>
+      <MultiSelect label="Select multi select" control={control} controlName="multiSelect">
+        <MultiSelect.Option data={{ id: 1 }}>Multi 1</MultiSelect.Option>
+        <MultiSelect.Option data={{ id: 2 }}>Multi 2</MultiSelect.Option>
+        <MultiSelect.Option data={{ id: 3 }}>Multi 3</MultiSelect.Option>
+        <MultiSelect.Option data={{ id: 4 }}>Multi 4</MultiSelect.Option>
+      </MultiSelect>
     </div>
   );
 };
