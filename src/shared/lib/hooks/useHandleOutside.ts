@@ -1,7 +1,5 @@
 import { RefObject, useEffect } from 'react';
 
-type Handler = (event: MouseEvent) => void
-
 export function useHandleOutside<T extends HTMLElement = HTMLElement>(
 	ref: RefObject<T>,
 	handler: Handler,
