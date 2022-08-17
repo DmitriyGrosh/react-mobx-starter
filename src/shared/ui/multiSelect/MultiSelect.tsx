@@ -131,7 +131,6 @@ const MultiSelect: FC<PropsWithChildren<IMultiSelect>> = ({
 		}
 	}, []);
 
-	console.log('==========>defaultValue', defaultValue);
 	return (
 		<div ref={multiSelectRef} className={`multi-select-color-${color}`}>
 			{/* eslint-disable-next-line max-len */}
