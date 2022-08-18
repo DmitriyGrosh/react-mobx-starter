@@ -6,6 +6,7 @@ import { Button } from 'shared/ui/button';
 import { Input } from 'shared/ui/input';
 import { Select } from 'shared/ui/select';
 import { MultiSelect } from 'shared/ui/multiSelect';
+import { Autocomplete } from 'shared/ui/autocomplete';
 
 const Home = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
@@ -32,6 +33,8 @@ const Home = () => {
       id: 1,
     },
   };
+
+  const test = ['qwet', 'asdncnsdjc', 'safgdudcubaucb', 'ygbsn,a;sopsa'];
 
   return (
     <div>
@@ -74,6 +77,12 @@ const Home = () => {
         <MultiSelect.Option data={{ id: 3 }}>Multi 3</MultiSelect.Option>
         <MultiSelect.Option data={{ id: 4 }}>Multi 4</MultiSelect.Option>
       </MultiSelect>
+      <Autocomplete
+        getOptionLabel={(el) => el}
+        options={test}
+        {...register('autocomplete')}
+        isLoading
+      />
     </div>
   );
 };
