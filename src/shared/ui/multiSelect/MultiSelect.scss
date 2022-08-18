@@ -57,6 +57,7 @@
 				max-height: 0;
 				overflow: scroll;
 				transition: max-height 200ms ease;
+				z-index: 200;
 
 				&__active {
 					max-height: 500px;

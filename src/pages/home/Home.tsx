@@ -48,6 +48,12 @@ const Home = () => {
       <Button onClick={getData}>отправить</Button>
       <Input placeholder="Second Name" label="Second Name" {...register('secondName')} />
       <Input placeholder="First Name" label="First Name" {...register('firstName')} />
+      <Autocomplete
+        getOptionLabel={(el) => el}
+        options={test}
+        {...register('autocomplete')}
+        isLoading
+      />
       <Select {...register('select')} value="1" color="indigo">
         <Select.Option value="1">label</Select.Option>
         <Select.Option value="2">label 1</Select.Option>
@@ -77,12 +83,6 @@ const Home = () => {
         <MultiSelect.Option data={{ id: 3 }}>Multi 3</MultiSelect.Option>
         <MultiSelect.Option data={{ id: 4 }}>Multi 4</MultiSelect.Option>
       </MultiSelect>
-      <Autocomplete
-        getOptionLabel={(el) => el}
-        options={test}
-        {...register('autocomplete')}
-        isLoading
-      />
     </div>
   );
 };
