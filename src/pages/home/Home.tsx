@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Steps } from 'shared/ui/steps';
@@ -11,9 +11,11 @@ import { Autocomplete } from 'shared/ui/autocomplete';
 const Home = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
 
-  const handleSelect = (step: number) => {
+  const handleSelect = useCallback((step: number) => {
+    console.log('test', step)
     setActiveStep(step);
-  };
+
+  }, []);
 
   const checkValid = (step: number, index: number) => {
     return true;
@@ -39,7 +41,16 @@ const Home = () => {
   return (
     <div>
       <Steps isValid={checkValid} color="blue" onSelect={handleSelect} isColumn activeStep={activeStep}>
-        <Steps.Step>1 шаг</Steps.Step>
+        <Steps.Step
+          // color='red'
+          // isColumn
+          // activeStep={0}
+          // isFirst
+          // isLast
+          // isActive
+          // isCompleted
+          // index={0}
+         />
         <Steps.Step>2 шаг</Steps.Step>
         <Steps.Step>3 шаг</Steps.Step>
         <Steps.Step>4 шаг</Steps.Step>
