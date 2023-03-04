@@ -2,12 +2,10 @@ import React, {
 	Children,
 	cloneElement,
 	FC,
-	ReactElement,
 	PropsWithChildren,
+	memo,
 } from 'react';
-import { isFunction, assign, map } from 'lodash';
-
-import { StepsContext } from './Steps.context';
+import { isFunction, assign } from 'lodash';
 import { DefaultColor, DefaultColumn } from './Steps.types';
 
 import Step from './Step';
@@ -23,7 +21,21 @@ interface IStepsProps {
 	onSelect?: (step: number) => void;
 }
 
-const Steps: FC<PropsWithChildren<IStepsProps>> = ({
+export interface IStepsPropsT {
+	color: BaseColors;
+	isColumn: boolean;
+	nonLinear?: boolean;
+	activeStep: number;
+	isValid?: boolean;
+	isFirst: boolean;
+	isLast: boolean;
+	isActive: boolean;
+	isCompleted: boolean;
+	index: number;
+	onSelect?: (step: number) => void;
+}
+
+const Steps: FC<PropsWithChildren<IStepsProps>> = memo(({
 	color,
 	isColumn,
 	nonLinear,
@@ -36,33 +48,24 @@ const Steps: FC<PropsWithChildren<IStepsProps>> = ({
 	const { length } = steps;
 
 	const render = () => {
-		return map(steps, (step, index) => {
+		return Children.map(children, (child, index) => {
 			const isFirst = index === 0;
 			const isLast = index === length - 1;
 			const isActive = activeStep === index;
 			const isCompleted = !nonLinear && activeStep > index;
 			const isValidStep = isFunction(isValid) ? isValid(activeStep, index) : true;
 
-			const StepContext = (
-				<StepsContext.Provider
-					key={index}
-					value={{
-						isFirst,
-						isLast,
-						isActive,
-						isCompleted,
-						isValid: isValidStep,
-						index,
-						onSelect,
-						color,
-						isColumn,
-				}}
-				>
-					{step}
-				</StepsContext.Provider>
-			);
-
-			return cloneElement(StepContext as ReactElement);
+			return cloneElement(child as React.ReactElement, {
+				isFirst,
+				isLast,
+				isActive,
+				isCompleted,
+				isValid: isValidStep,
+				index,
+				onSelect,
+				color,
+				isColumn,
+			});
 		});
 	};
 
@@ -73,7 +76,7 @@ const Steps: FC<PropsWithChildren<IStepsProps>> = ({
 			</div>
 		</div>
 	);
-};
+});
 
 Steps.displayName = 'Steps';
 Steps.defaultProps = {

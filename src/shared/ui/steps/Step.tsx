@@ -1,12 +1,13 @@
-import React, { FC, PropsWithChildren, useContext } from 'react';
+import React, { FC, memo, PropsWithChildren } from 'react';
 import { isFunction } from 'lodash';
 
-import { DefaultColor } from './Steps.types';
-import { StepsContext, IStepsContextProps } from './Steps.context';
+import { HOC } from '../hoc';
 
 import './Step.scss';
 
-const Step: FC<PropsWithChildren> = ({ children }) => {
+import { IStepsPropsT } from './Steps';
+
+const StepTest: FC<PropsWithChildren<IStepsPropsT>> = (props) => {
 	const {
 		isFirst,
 		isLast,
@@ -17,7 +18,8 @@ const Step: FC<PropsWithChildren> = ({ children }) => {
 		index,
 		isColumn,
 		color,
-	} =	useContext<IStepsContextProps>(StepsContext);
+		children,
+	} =	props;
 	const classNameColor = `step-color-${color}`;
 	const isDefaultBgColor = isActive || isCompleted ? classNameColor : '';
 
@@ -49,7 +51,7 @@ const Step: FC<PropsWithChildren> = ({ children }) => {
 						aria-hidden="true"
 						onClick={handleChange}
 					>
-            {children}
+             {children}
 					</span>
 				</div>
 			) : (
@@ -61,6 +63,8 @@ const Step: FC<PropsWithChildren> = ({ children }) => {
 	);
 };
 
+const Step = memo(StepTest);
+
 Step.displayName = 'Step';
 
-export default Step;
+export default HOC<IStepsPropsT, PropsWithChildren>({} as IStepsPropsT)(Step);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Steps } from 'shared/ui/steps';
@@ -6,13 +6,15 @@ import { Button } from 'shared/ui/button';
 import { Input } from 'shared/ui/input';
 import { Select } from 'shared/ui/select';
 import { MultiSelect } from 'shared/ui/multiSelect';
+import { Autocomplete } from 'shared/ui/autocomplete';
 
 const Home = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
 
-  const handleSelect = (step: number) => {
+  const handleSelect = useCallback((step: number) => {
+    console.log('test', step);
     setActiveStep(step);
-  };
+  }, []);
 
   const checkValid = (step: number, index: number) => {
     return true;
@@ -33,6 +35,8 @@ const Home = () => {
     },
   };
 
+  const test = ['qwet', 'asdncnsdjc', 'safgdudcubaucb', 'ygbsn,a;sopsa'];
+
   return (
     <div>
       <Steps isValid={checkValid} color="blue" onSelect={handleSelect} isColumn activeStep={activeStep}>
@@ -45,6 +49,12 @@ const Home = () => {
       <Button onClick={getData}>отправить</Button>
       <Input placeholder="Second Name" label="Second Name" {...register('secondName')} />
       <Input placeholder="First Name" label="First Name" {...register('firstName')} />
+      <Autocomplete
+        getOptionLabel={(el) => el}
+        options={test}
+        {...register('autocomplete')}
+        isLoading
+      />
       <Select {...register('select')} value="1" color="indigo">
         <Select.Option value="1">label</Select.Option>
         <Select.Option value="2">label 1</Select.Option>

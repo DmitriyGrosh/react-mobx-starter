@@ -1,22 +1,30 @@
 @import "src/app/styles/mixins";
 @import "src/app/styles/vars";
 
-@mixin selectColor($component, $colors) {
+@mixin autocompleteColor($component, $colors) {
 	@each $color in $colors {
-		.#{$component}-color-#{"" + $color} {
+		.#{$component}-#{"" + $color} {
+			width: 500px;
 			position: relative;
-			width: 300px;
-			height: 42px;
-			display: inline-flex;
-			border: 1px solid $color;
-			padding-left: 10px;
-			border-radius: 5px;
 
-			.selected {
-				@include inlineFlexCenter;
+			&__container {
+				@include inlineFlexBetween;
+				border: 1px solid blue;
+				gap: 5px;
+				width: 100%;
+				padding-left: 5px;
+				height: 42px;
+				box-sizing: border-box;
+				border-radius: 5px;
+
+				&__input {
+					flex: 1;
+					border: none;
+					outline: none;
+				}
 			}
 
-			.options {
+			&__list {
 				position: absolute;
 				top: 50px;
 				right: 0;
@@ -37,38 +45,24 @@
 					border: 1px solid lightgray;
 				}
 
-				.option {
+				.list-row {
+					cursor: pointer;
 					padding: 10px;
 					position: relative;
-					border-top: 1px solid toRgba($color, 0.5);
+					border-top: 1px solid toRgba(blue, 0.5);
 
 					&:first-child {
 						border-top: none;
 					}
 
 					&:hover {
-						background: toRgba($color, 0.1);
+						background: toRgba(blue, 0.1);
 					}
 
-					&__text {
-
-					}
-
-					&__radio {
-						top: 0;
-						left: 0;
-						position: absolute;
-						opacity: 0;
-						width: 100%;
-						height: 100%;
-					}
-
-					&__active {
-						background: $color;
-						color: white;
-
+					&__disabled {
+						cursor: auto;
 						&:hover {
-							background: toRgba($color, 0.6);
+							background: none;
 						}
 					}
 				}
@@ -77,4 +71,4 @@
 	}
 }
 
-@include selectColor('select', $colors);
+@include autocompleteColor('autocomplete', $colors);

@@ -7,7 +7,6 @@
 			position: relative;
 			width: 350px;
 			height: 42px;
-			z-index: 1;
 			display: inline-flex;
 			border: 1px solid $color;
 			padding-left: 10px;
@@ -58,6 +57,7 @@
 				max-height: 0;
 				overflow: scroll;
 				transition: max-height 200ms ease;
+				z-index: 200;
 
 				&__active {
 					max-height: 500px;
