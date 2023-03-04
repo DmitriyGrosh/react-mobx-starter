@@ -21,18 +21,12 @@ interface IStepsProps {
 	onSelect?: (step: number) => void;
 }
 
-export interface IStepsPropsT {
-	color: BaseColors;
-	isColumn: boolean;
-	nonLinear?: boolean;
-	activeStep: number;
-	isValid?: boolean;
+export interface IStepProps extends IStepsProps {
 	isFirst: boolean;
 	isLast: boolean;
 	isActive: boolean;
 	isCompleted: boolean;
 	index: number;
-	onSelect?: (step: number) => void;
 }
 
 const Steps: FC<PropsWithChildren<IStepsProps>> = memo(({

@@ -5,9 +5,9 @@ import { HOC } from '../hoc';
 
 import './Step.scss';
 
-import { IStepsPropsT } from './Steps';
+import { IStepProps } from './Steps';
 
-const StepTest: FC<PropsWithChildren<IStepsPropsT>> = (props) => {
+const Step: FC<PropsWithChildren<IStepProps>> = (props) => {
 	const {
 		isFirst,
 		isLast,
@@ -63,8 +63,8 @@ const StepTest: FC<PropsWithChildren<IStepsPropsT>> = (props) => {
 	);
 };
 
-const Step = memo(StepTest);
+const StepContainer = memo(Step);
 
 Step.displayName = 'Step';
 
-export default HOC<IStepsPropsT, PropsWithChildren>({} as IStepsPropsT)(Step);
+export default HOC<IStepProps, PropsWithChildren>({} as IStepProps)(StepContainer);
