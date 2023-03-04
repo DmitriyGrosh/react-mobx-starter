@@ -12,9 +12,8 @@ const Home = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
 
   const handleSelect = useCallback((step: number) => {
-    console.log('test', step)
+    console.log('test', step);
     setActiveStep(step);
-
   }, []);
 
   const checkValid = (step: number, index: number) => {
@@ -41,16 +40,7 @@ const Home = () => {
   return (
     <div>
       <Steps isValid={checkValid} color="blue" onSelect={handleSelect} isColumn activeStep={activeStep}>
-        <Steps.Step
-          // color='red'
-          // isColumn
-          // activeStep={0}
-          // isFirst
-          // isLast
-          // isActive
-          // isCompleted
-          // index={0}
-         />
+        <Steps.Step>1 шаг</Steps.Step>
         <Steps.Step>2 шаг</Steps.Step>
         <Steps.Step>3 шаг</Steps.Step>
         <Steps.Step>4 шаг</Steps.Step>

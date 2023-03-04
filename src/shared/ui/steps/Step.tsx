@@ -1,15 +1,13 @@
-import React, { FC, PropsWithChildren, useContext, memo, ComponentType } from 'react';
+import React, { FC, memo, PropsWithChildren } from 'react';
 import { isFunction } from 'lodash';
 
-import { DefaultColor } from './Steps.types';
-import { StepsContext, IStepsContextProps } from './Steps.context';
+import { HOC } from '../hoc';
 
 import './Step.scss';
-import { HOC } from './hoc';
+
 import { IStepsPropsT } from './Steps';
 
-const StepTest: FC<IStepsPropsT> = (props) => {
-	console.log('step')
+const StepTest: FC<PropsWithChildren<IStepsPropsT>> = (props) => {
 	const {
 		isFirst,
 		isLast,
@@ -20,7 +18,8 @@ const StepTest: FC<IStepsPropsT> = (props) => {
 		index,
 		isColumn,
 		color,
-	} =	props
+		children,
+	} =	props;
 	const classNameColor = `step-color-${color}`;
 	const isDefaultBgColor = isActive || isCompleted ? classNameColor : '';
 
@@ -52,7 +51,7 @@ const StepTest: FC<IStepsPropsT> = (props) => {
 						aria-hidden="true"
 						onClick={handleChange}
 					>
-            {/* {children} */}
+             {children}
 					</span>
 				</div>
 			) : (
@@ -68,4 +67,4 @@ const Step = memo(StepTest);
 
 Step.displayName = 'Step';
 
-export default HOC<HTMLDivElement, IStepsPropsT>(Step);
+export default HOC<IStepsPropsT, PropsWithChildren>({} as IStepsPropsT)(Step);

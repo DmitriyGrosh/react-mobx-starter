@@ -2,15 +2,10 @@ import React, {
 	Children,
 	cloneElement,
 	FC,
-	ReactElement,
 	PropsWithChildren,
 	memo,
-	ReactNode,
-	isValidElement,
 } from 'react';
-import { isFunction, assign, map } from 'lodash';
-
-import { IStepsContextProps, StepsContext } from './Steps.context';
+import { isFunction, assign } from 'lodash';
 import { DefaultColor, DefaultColumn } from './Steps.types';
 
 import Step from './Step';
@@ -53,34 +48,6 @@ const Steps: FC<PropsWithChildren<IStepsProps>> = memo(({
 	const { length } = steps;
 
 	const render = () => {
-		// return map(steps, (step, index) => {
-		// 	const isFirst = index === 0;
-		// 	const isLast = index === length - 1;
-		// 	const isActive = activeStep === index;
-		// 	const isCompleted = !nonLinear && activeStep > index;
-		// 	const isValidStep = isFunction(isValid) ? isValid(activeStep, index) : true;
-
-		// 	const StepContext = (
-		// 		<StepsContext.Provider
-		// 			key={index}
-		// 			value={{
-		// 				isFirst,
-		// 				isLast,
-		// 				isActive,
-		// 				isCompleted,
-		// 				isValid: isValidStep,
-		// 				index,
-		// 				onSelect,
-		// 				color,
-		// 				isColumn,
-		// 		}}
-		// 		>
-		// 			{step}
-		// 		</StepsContext.Provider>
-		// 	);
-
-		// 	return cloneElement(StepContext as ReactElement);
-		// });
 		return Children.map(children, (child, index) => {
 			const isFirst = index === 0;
 			const isLast = index === length - 1;
@@ -88,7 +55,6 @@ const Steps: FC<PropsWithChildren<IStepsProps>> = memo(({
 			const isCompleted = !nonLinear && activeStep > index;
 			const isValidStep = isFunction(isValid) ? isValid(activeStep, index) : true;
 
-			
 			return cloneElement(child as React.ReactElement, {
 				isFirst,
 				isLast,
@@ -99,14 +65,8 @@ const Steps: FC<PropsWithChildren<IStepsProps>> = memo(({
 				onSelect,
 				color,
 				isColumn,
-			})
-
-			
-			
-
-		}
-			
-		  )
+			});
+		});
 	};
 
 	return (
@@ -116,7 +76,7 @@ const Steps: FC<PropsWithChildren<IStepsProps>> = memo(({
 			</div>
 		</div>
 	);
-})
+});
 
 Steps.displayName = 'Steps';
 Steps.defaultProps = {
