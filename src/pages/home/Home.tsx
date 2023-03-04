@@ -12,7 +12,6 @@ const Home = () => {
   const [activeStep, setActiveStep] = useState<number>(0);
 
   const handleSelect = useCallback((step: number) => {
-    console.log('test', step);
     setActiveStep(step);
   }, []);
 
